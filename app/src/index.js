@@ -35,27 +35,18 @@ const App = {
     const { createStar } = this.meta.methods;
     const name = document.getElementById("starName").value;
     const id = document.getElementById("starId").value;
-    const symbol = document.getElementById("starSymbol").value;
-    await createStar(name, symbol, id).send({from: this.account});
+    await createStar(name, id).send({from: this.account});
     App.setStatus("New Star Owner is " + this.account + ".");
     console.log('Star created successfully');
   },
-
-  // // function called to show the starOwner
-  // starOwnerFunc: async function() {
-  //   const { starOwner } = this.meta.methods; // to be able to use the functions in your Smart Contract use destructuring to get the function to be call
-  //   const response = await starOwner().call(); // calling the starOwner property from your Smart Contract.
-  //   const owner = document.getElementById("owner"); // Updating Html
-  //   owner.innerHTML = response;
-  // },
 
   // Implement Task 4 Modify the front end of the DAPP
   lookUp: async function (){
 
     const { lookUptokenIdToStarInfo } = this.meta.methods;
     const lookid = document.getElementById("lookid").value;
-    const response = await lookUptokenIdToStarInfo(lookid).call();
-    App.setStatus("Token ID: " + lookid + " has name: " + response + ".");
+    let response = await lookUptokenIdToStarInfo(lookid).call();
+    App.setStatus("Star name is " + response + ".");
     console.log("success");
 
   }
